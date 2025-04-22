@@ -1,5 +1,6 @@
 ﻿using FloAPI.Config;
 using FloAPI.Data;
+using FloAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSingleton<MongoDbContext>();
 builder.Services.Configure<ConstantContactSettings>(builder.Configuration.GetSection("ConstantContact"));
+builder.Services.AddSingleton<ConstantContactService>();
+
 // ✅ Swagger/OpenAPI support using Swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

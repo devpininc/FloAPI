@@ -16,6 +16,6 @@ namespace FloAPI.Data
         }
 
 
-        public IMongoCollection<Agent> Agents => _database.GetCollection<Agent>("Agents");
+        public IMongoCollection<User> Agents => _database.GetCollection<User>("Agents");
     }
 }

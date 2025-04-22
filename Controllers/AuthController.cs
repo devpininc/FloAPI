@@ -32,7 +32,7 @@ namespace FloAPI.Controllers
             _db.Agents.ReplaceOne(a => a.Id == agent.Id, agent);
 
             // Replace this with actual email sending logic
-            var loginUrl = $"https://your-frontend.com/login?token={token}";
+            var loginUrl = $"https://homepin.ca/login?token={token}";
 
             Console.WriteLine($"[DEBUG] Magic Link: {loginUrl}");
 
