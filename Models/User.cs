@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace FloAPI.Models
 {
-    public class Agent
+    public class User
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -30,6 +30,7 @@ namespace FloAPI.Models
         public bool IsTrial { get; set; } = true;
 
         public DateTime? LastPaymentDate { get; set; }
+        // Optional login shortcut
         public string MagicToken { get; set; }
         public DateTime? MagicTokenExpiresAt { get; set; }
         public bool MagicTokenUsed { get; set; }
