@@ -1,7 +1,7 @@
 User Management – FloAPI (Summary)
 
 - Use a single MongoDB collection: `Flo_Users`
-- Store all users (`SysAdmin`, `Agent`, `Client`) with a `Role` field
+- Store all users (`SysAdmin`, `Admin`, `Agent`, `Client`) with a `Role` field
 - No passwords — **magic link only** login via email
 - Once logged in, issue:
   - JWT access token (15–60 min)
