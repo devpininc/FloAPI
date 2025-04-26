@@ -17,26 +17,51 @@ namespace FloAPI.Services
             _http = new HttpClient();
         }
 
-        public async Task<bool> SendMagicLinkAsync(string toEmail, string subject, string htmlContent, string accessToken)
+        public async Task<bool> SendMagicLinkAsync(string toEmail, string loginUrl, string accessToken)
         {
-            var requestUrl = $"{_settings.ApiBaseUrl}emails/send";
+            var requestUrl = $"{_settings.ApiBaseUrl}emails";
+
+            // Load the email template and replace {{LoginUrl}}
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "Templates", "MagicLinkEmailTemplate.html");
+            var htmlContent = File.ReadAllText(templatePath).Replace("{{LoginUrl}}", loginUrl);
 
             var payload = new
             {
-                email_address = toEmail,
-                subject = subject,
-                html_content = htmlContent,
-                from_email = "your_verified_sender@example.com", // Must be verified in Constant Contact
-                from_name = "FloAPI"
+                personalizations = new[]
+                {
+                new
+                {
+                    to = new[]
+                    {
+                        new { email = toEmail }
+                    },
+                        subject = "Your Magic Login Link to AgentFlo"
+                    }
+                },
+                from = new
+                {
+                    email = "jango.aws@gmail.com", // Replace with your real verified sender
+                    name = "AgentFlo"
+                },
+                content = new[]
+                {
+                    new
+                    {
+                        type = "text/html",
+                        value = htmlContent
+                    }
+                }
             };
 
             var json = System.Text.Json.JsonSerializer.Serialize(payload);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
 
             _http.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", accessToken);
 
-            var response = await _http.PostAsync(requestUrl, content);
+            var response = await _http.PostAsync(requestUrl, httpContent);
             return response.IsSuccessStatusCode;
         }
+
+
     }
 }
