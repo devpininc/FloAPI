@@ -5,6 +5,7 @@ using MongoDB.Driver;
 using System.Security.Cryptography;
 using FloAPI.Config;
 using Microsoft.Extensions.Options;
+using FloAPI.Services;
 
 namespace FloAPI.Controllers
 {
@@ -14,12 +15,14 @@ namespace FloAPI.Controllers
     {
         private readonly MongoDbContext _db;
         private readonly JwtSettings _jwt;
-        private readonly ConstantContactSettings _emailService;
-        public AuthController(MongoDbContext db, IOptions<JwtSettings> jwtSettings, IOptions<ConstantContactSettings> emailService)
+        private readonly ConstantContactService _emailService;
+        private readonly ConstantContactSettings _constantContactSettings;
+        public AuthController(MongoDbContext db, IOptions<JwtSettings> jwtSettings, ConstantContactService emailService, IOptions<ConstantContactSettings> constantContactSettings)
         {
             _db = db;
             _jwt = jwtSettings.Value;
-            _emailService = emailService.Value;
+            _emailService = emailService;
+            _constantContactSettings = constantContactSettings.Value;
         }
         private string GenerateJwtToken(User user)
         {
@@ -60,8 +63,11 @@ namespace FloAPI.Controllers
             _db.Users.ReplaceOne(u => u.Id == user.Id, user);
 
             var loginUrl = $"https://homepin.ca/login?token={token}";
+            var subject = "Your Magic Login Link";
+            var body = $"Click the link below to log in:\n\n{loginUrl}";
 
-            Console.WriteLine($"[DEBUG] Magic Link: {loginUrl}");
+            var accessToken = _constantContactSettings.AccessToken; 
+            _emailService.SendMagicLinkAsync("jango.aws@gmail.com",loginUrl, accessToken);
 
             return Ok("Login link sent (simulated)");
         }
