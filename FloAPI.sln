@@ -3,9 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloAPI", "FloAPI\FloAPI.csproj", "{89E5E325-AAD3-8178-BA2B-4BB2C722614A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi", "FloAPI\FloApi.csproj", "{89E5E325-AAD3-8178-BA2B-4BB2C722614A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFloApi", "TestFloApi\TestFloApi.csproj", "{78145FE3-1D0A-4763-8B10-1473829ADB9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi.Users", "FloApi.Users\FloApi.Users.csproj", "{02FBE0C5-BC15-40C5-878A-BA6A9D5B0924}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi.Email", "FloApi.Email\FloApi.Email.csproj", "{FC232267-9DEC-4B3F-A4D0-CFBB688C1226}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi.Logging", "FloApi.Logging\FloApi.Logging.csproj", "{DAA0F0D5-C098-4DEE-A84C-6712AB88EC1C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +27,18 @@ Global
 		{78145FE3-1D0A-4763-8B10-1473829ADB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78145FE3-1D0A-4763-8B10-1473829ADB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78145FE3-1D0A-4763-8B10-1473829ADB9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02FBE0C5-BC15-40C5-878A-BA6A9D5B0924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02FBE0C5-BC15-40C5-878A-BA6A9D5B0924}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02FBE0C5-BC15-40C5-878A-BA6A9D5B0924}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02FBE0C5-BC15-40C5-878A-BA6A9D5B0924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC232267-9DEC-4B3F-A4D0-CFBB688C1226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC232267-9DEC-4B3F-A4D0-CFBB688C1226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC232267-9DEC-4B3F-A4D0-CFBB688C1226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC232267-9DEC-4B3F-A4D0-CFBB688C1226}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DAA0F0D5-C098-4DEE-A84C-6712AB88EC1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DAA0F0D5-C098-4DEE-A84C-6712AB88EC1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DAA0F0D5-C098-4DEE-A84C-6712AB88EC1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DAA0F0D5-C098-4DEE-A84C-6712AB88EC1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
