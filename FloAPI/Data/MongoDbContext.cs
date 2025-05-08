@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MongoDB.Driver;
-using FloAPI.Models;
+using FloApi.Models;
 
-namespace FloAPI.Data
+namespace FloApi.Data
 {
     public class MongoDbContext
     {

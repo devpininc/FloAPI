@@ -1,26 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using FloAPI.Data;
-using FloAPI.Models;
+using FloApi.Data;
+using FloApi.Models;
 using MongoDB.Driver;
 using Microsoft.AspNetCore.Authorization;
-using FloAPI.Config;
+using FloApi.Config;
 using Microsoft.Extensions.Options;
 using System.Runtime;
 using System.Security.Cryptography;
 
-namespace FloAPI.Controllers
+namespace FloApi.Controllers
 {
     [ApiController]
     [Route("api/users")]
     public class UsersController : ControllerBase
     {
         private readonly MongoDbContext _db;
-        private readonly AgentOnboardingSettings _agentSettings;
+        
 
-        public UsersController(MongoDbContext db, IOptions<AgentOnboardingSettings> agentSettings)
+        public UsersController(MongoDbContext db)
         {
             _db = db;
-            _agentSettings = agentSettings.Value;
         }
         [Authorize(Roles = "SysAdmin")]
         [HttpGet]
@@ -49,23 +48,23 @@ namespace FloAPI.Controllers
         {
             agent.Role = "Agent";
             agent.RegisteredAt = DateTime.UtcNow;
-            agent.TrialExpiresAt = DateTime.UtcNow.AddDays(_agentSettings.TrialDays); // or configurable
+           // agent.TrialExpiresAt = DateTime.UtcNow.AddDays(_agentSettings.TrialDays); // or configurable
             agent.IsTrial = true;
             agent.IsActive = false; // activate after payment
             _db.Users.InsertOne(agent);
-            if (_agentSettings.SendMagicLinkOnCreate)
-            {
-                // Generate a magic link (copy from AuthController)
-                var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
-                agent.MagicToken = token;
-                agent.MagicTokenExpiresAt = DateTime.UtcNow.AddMinutes(10);
-                agent.MagicTokenUsed = false;
+            //if (_agentSettings.SendMagicLinkOnCreate)
+            //{
+            //    // Generate a magic link (copy from AuthController)
+            //    var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
+            //    agent.MagicToken = token;
+            //    agent.MagicTokenExpiresAt = DateTime.UtcNow.AddMinutes(10);
+            //    agent.MagicTokenUsed = false;
 
-                _db.Users.ReplaceOne(u => u.Id == agent.Id, agent);
+            //    _db.Users.ReplaceOne(u => u.Id == agent.Id, agent);
 
-                var loginUrl = $"https://homepin.ca/login?token={token}";
-                Console.WriteLine($"[MAGIC LINK] Sent to {agent.Email}: {loginUrl}");
-            }
+            //    var loginUrl = $"https://homepin.ca/login?token={token}";
+            //    Console.WriteLine($"[MAGIC LINK] Sent to {agent.Email}: {loginUrl}");
+            //}
             return CreatedAtAction(nameof(GetAll), new { id = agent.Id }, agent);
         }
 

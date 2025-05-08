@@ -1,7 +1,7 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace FloAPI.Models
+namespace FloApi.Models
 {
     public class User
     {

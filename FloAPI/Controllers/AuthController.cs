@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using FloAPI.Data;
-using FloAPI.Models;
+using FloApi.Data;
+using FloApi.Models;
 using MongoDB.Driver;
 using System.Security.Cryptography;
-using FloAPI.Config;
+using FloApi.Config;
 using Microsoft.Extensions.Options;
-using FloAPI.Services;
 
-namespace FloAPI.Controllers
+namespace FloApi.Controllers
 {
     [ApiController]
     [Route("api/auth")]
@@ -15,14 +14,11 @@ namespace FloAPI.Controllers
     {
         private readonly MongoDbContext _db;
         private readonly JwtSettings _jwt;
-        private readonly ConstantContactService _emailService;
-        private readonly ConstantContactSettings _constantContactSettings;
-        public AuthController(MongoDbContext db, IOptions<JwtSettings> jwtSettings, ConstantContactService emailService, IOptions<ConstantContactSettings> constantContactSettings)
+        
+        public AuthController(MongoDbContext db, IOptions<JwtSettings> jwtSettings)
         {
             _db = db;
             _jwt = jwtSettings.Value;
-            _emailService = emailService;
-            _constantContactSettings = constantContactSettings.Value;
         }
         private string GenerateJwtToken(User user)
         {
@@ -66,8 +62,8 @@ namespace FloAPI.Controllers
             var subject = "Your Magic Login Link";
             var body = $"Click the link below to log in:\n\n{loginUrl}";
 
-            var accessToken = _constantContactSettings.AccessToken; 
-            _emailService.SendMagicLinkAsync("jango.aws@gmail.com",loginUrl, accessToken);
+            //var accessToken = _constantContactSettings.AccessToken; 
+            //_emailService.SendMagicLinkAsync("jango.aws@gmail.com",loginUrl, accessToken);
 
             return Ok("Login link sent (simulated)");
         }

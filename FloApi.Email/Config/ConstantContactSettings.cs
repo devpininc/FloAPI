@@ -1,4 +1,4 @@
-﻿namespace FloAPI.Config
+﻿namespace FloApi.Config
 {
     public class ConstantContactSettings
     {

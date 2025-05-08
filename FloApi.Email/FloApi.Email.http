@@ -1,0 +1,6 @@
+@FloApi.Email.Email_HostAddress = http://localhost:5071
+
+GET {{FloApi.Email.Email_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
