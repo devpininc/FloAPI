@@ -62,5 +62,6 @@ app.UseAuthentication();   // ✅ This must come before UseAuthorization
 app.UseAuthorization();
 
 app.MapControllers();
+app.UseSerilogRequestLogging();
 
 app.Run();
