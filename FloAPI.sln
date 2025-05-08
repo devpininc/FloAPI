@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.13.35825.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi", "FloAPI\FloApi.csproj", "{89E5E325-AAD3-8178-BA2B-4BB2C722614A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi", "FloApi\FloApi.csproj", "{89E5E325-AAD3-8178-BA2B-4BB2C722614A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFloApi", "TestFloApi\TestFloApi.csproj", "{78145FE3-1D0A-4763-8B10-1473829ADB9E}"
 EndProject

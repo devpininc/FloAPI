@@ -1,41 +1,53 @@
 ﻿using FloApi.Config;
 using FloApi.Data;
-
+using FloApi.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services
+// 🔹 Configure Serilog
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/floapi-.log", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
+
+// 🔹 Register services
 builder.Services.AddControllers();
 builder.Services.AddSingleton<MongoDbContext>();
+builder.Services.AddSingleton<TokenService>();
 
-builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("Jwt"));
+// 🛠️ Fix key to match your actual appsettings: "JwtSettings"
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
-
-
-// ✅ Swagger/OpenAPI support using Swashbuckle
+// 🔹 Swagger/OpenAPI
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var jwtSettings = builder.Configuration.GetSection("Jwt").Get<JwtSettings>();
-var jwtKey = jwtSettings.Key;
+// 🔐 JWT Authentication setup
+var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+var jwtKey = jwtSettings.SecretKey;
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = false,
-            ValidateAudience = false,
+            ValidateIssuer = true,
+            ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(jwtKey))
+            ValidIssuer = jwtSettings.Issuer,
+            ValidAudience = jwtSettings.Audience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
     });
-
 
 var app = builder.Build();
 
@@ -46,8 +58,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();  // 👈 Add this line
+app.UseAuthentication();   // ✅ This must come before UseAuthorization
 app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
