@@ -13,13 +13,13 @@ namespace TestFloApi.ConsoleApp
         {
             _client = new HttpClient
             {
-                BaseAddress = new Uri("https://localhost:7187") // your FloAPI address
+                BaseAddress = new Uri("https://localhost:7187") // your FloApi address
             };
         }
 
         public async Task RunAsync()
         {
-            Console.WriteLine("Starting FloAPI test...");
+            Console.WriteLine("Starting FloApi test...");
 
             // Step 1: Send Magic Link
             var email = "sunil@homepin.ca";

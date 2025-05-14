@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestFloApi", "TestFloApi\Te
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi.Email", "FloApi.Email\FloApi.Email.csproj", "{73C3D6A7-7144-AC2F-E0A4-A97EC5A7AEBE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FloApi.Contacts", "FloApi.Contact\FloApi.Contacts.csproj", "{F7457707-3F4C-4238-9825-FC453F472073}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{73C3D6A7-7144-AC2F-E0A4-A97EC5A7AEBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C3D6A7-7144-AC2F-E0A4-A97EC5A7AEBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73C3D6A7-7144-AC2F-E0A4-A97EC5A7AEBE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7457707-3F4C-4238-9825-FC453F472073}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7457707-3F4C-4238-9825-FC453F472073}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7457707-3F4C-4238-9825-FC453F472073}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7457707-3F4C-4238-9825-FC453F472073}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

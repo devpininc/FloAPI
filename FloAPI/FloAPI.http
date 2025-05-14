@@ -1,6 +1,6 @@
-@FloAPI_HostAddress = http://localhost:5014
+@FloApi_HostAddress = http://localhost:5014
 
-GET {{FloAPI_HostAddress}}/weatherforecast/
+GET {{FloApi_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
